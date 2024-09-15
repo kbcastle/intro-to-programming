@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public GameObject myEnemy;
     public GameObject myPrize;
     public TextMeshProUGUI scoreText;
+    [SerializeField] carController carController;
+    public int displayScore = 0;
 
     //declare bounding box
     public Vector2 xBounds;
@@ -21,12 +23,14 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //scoreText.text = "Score" + 
+        scoreText.text = "Score: " + carController.score;
     }
 
     // Update is called once per frame
     void Update()
     {
+        scoreText.text = "Score: " + carController.score;
+
         enemyTimer += Time.deltaTime;
 
         Vector3 targetPositionEnemy = new Vector3(Random.Range(xBounds.x, xBounds.y), Random.Range(yBounds.x, yBounds.y), 0);
