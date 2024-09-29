@@ -10,20 +10,19 @@ public class carController : MonoBehaviour
     public float speed = 0.5f;
     public int score = 0;
 
-    public AudioSource audioSource;
-    public AudioClip crash;
-    public AudioClip prize;
+    public AudioSource audioSourcePrize;
+
 
     //game restart text
-    bool gameEnded = false;
+    public bool gameEnded = false;
+    public bool crashSound = false;
     //public TextMeshProUGUI restartText;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        //restartText.enabled = false;
-        //audioSource = GetComponent<AudioSource>();
+ 
     }
 
     // Update is called once per frame
@@ -53,15 +52,6 @@ public class carController : MonoBehaviour
             Debug.Log("D Pressed");
         }
 
-       /* if (gameEnded == true)
-        {
-            restartText.enabled = true;
-        }
-
-        if (gameEnded == true && Input.GetKey(KeyCode.R))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }*/
     }
 
     void OnCollisionEnter2D (Collision2D collision)
@@ -69,14 +59,14 @@ public class carController : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             gameEnded = true;
-            audioSource.PlayOneShot(crash, 0.8f);
+            crashSound = true;
             Debug.Log("Collided with enemy");
             Destroy(myCar);
         }
 
         if (collision.gameObject.tag == "Prize")
         {
-            audioSource.PlayOneShot(prize, 0.8f);
+            audioSourcePrize.Play();
             Debug.Log("Collided with prize");
             score += 1;
             Destroy(collision.gameObject);

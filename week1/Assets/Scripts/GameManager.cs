@@ -26,6 +26,9 @@ public class GameManager : MonoBehaviour
     //restart text
     public TextMeshProUGUI restartText;
 
+    //game end sound
+    public AudioSource audioSourceCrash;
+
     //declare bounding box
     public Vector2 xBounds;
     public Vector2 yBounds;
@@ -70,16 +73,22 @@ public class GameManager : MonoBehaviour
             prizeTimer = 0f;
             Instantiate(myPrize, targetPositionPrize, Quaternion.identity);
         }
-//how the fuck do i access this boolean from the car controller script
-      /*  if (gameEnded == true)
+
+        if (carController.crashSound == true)
+        {
+            audioSourceCrash.Play();
+            carController.crashSound = false;
+        }
+
+        if (carController.gameEnded == true)
         {
             restartText.enabled = true;
         }
 
-        if (gameEnded == true && Input.GetKey(KeyCode.R))
+        if (carController.gameEnded == true && Input.GetKey(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }*/
+        }
 
     }
 }
